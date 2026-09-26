@@ -12,3 +12,10 @@ implementation log, not a reconstruction of a two-day effort.
   current CBUAE sources; the operational-risk regulation changed in September
   2026, so the older 2018 standards will not be presented as current authority.
   Requested a GitHub destination; local work continues independently.
+- 2026-09-26T06:43:28Z - Implemented the core, exact-order replay, and 18 passing
+  regression tests. Ran the separate design challenge: it fails as intended
+  with a 9,000-minor-unit abandoned hold. Confirmed final balances AED 210.69
+  and BHD 10.008; three AED fees and conserved BHD instalments. Chose integer
+  minor units over the initially considered Decimal arithmetic to avoid
+  ambient-context precision effects. User supplied owner MUHAMMADASADVP.
+  Installed PDF-only dependencies in the ignored local virtual environment.
