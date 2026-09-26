@@ -85,16 +85,3 @@ the brief does not uniquely determine every policy.
 | `WORKLOG.md` | Actual UTC work entries and verification results |
 | `DESIGN.md` | Initial design checkpoint, retained in commit history |
 
-## Rebuild the PDF (optional)
-
-PDF tooling is separate from the dependency-free ledger:
-
-```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-pdf.txt
-.venv/bin/python scripts/build_pdf.py
-```
-
-The PDF is already committed. Do not squash the development commits when
-submitting. AI assistance was used; the implementation and policy decisions
-should be reviewed and understood before the no-AI live defense.
