@@ -37,3 +37,14 @@ implementation log, not a reconstruction of a two-day effort.
   faizantpdev-wq rather than the requested MUHAMMADASADVP. Checks for both the
   proposed repository and a workspace-named repository returned not found.
   Requested the exact writable repository URL; no remote history was changed.
+- 2026-09-26T07:09:50Z - Verified a clean export of the committed tree: all 24
+  regression tests pass with the standard library alone, the replay exactly
+  matches the committed report, all required files exist, and the intentional
+  test exits 1 with exactly one failure. `git diff --check` passed and the tree
+  was clean. Four chronological commits existed at that verification point.
+- 2026-09-26T07:11:25Z - After the user identified the account setup issue,
+  created a separate SSH key and `github-asad` host alias with approved filesystem
+  access. Existing account key was preserved. Configured the local submission
+  remote for MUHAMMADASADVP/in-memory-account-ledger and provided the public key
+  plus empty-public-repository setup steps. Awaiting account-side setup; no
+  private key material is included in this repository.
