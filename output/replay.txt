@@ -1,0 +1,85 @@
+ORIGINAL CLOSE CHECKPOINTS (input order; E10 arrives after the Day 5 close)
+
+Day 1 | journal through sequence 6
+  ACC-001 AED: closing=250.00 held=0.00 available=250.00 daily_interest=0.10
+    authorizations: none
+    fees assessed this close: none
+  ACC-002 BHD: closing=0.000 held=0.000 available=0.000 daily_interest=0.000
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: none
+
+Day 2 | journal through sequence 10
+  ACC-001 AED: closing=250.00 held=200.00 available=50.00 daily_interest=0.10
+    authorizations: Auth-A=ACTIVE
+    fees assessed this close: none
+  ACC-002 BHD: closing=0.000 held=0.000 available=0.000 daily_interest=0.000
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: none
+
+Day 3 | journal through sequence 14
+  ACC-001 AED: closing=650.00 held=200.00 available=450.00 daily_interest=0.26
+    authorizations: Auth-A=ACTIVE
+    fees assessed this close: none
+  ACC-002 BHD: closing=0.000 held=0.000 available=0.000 daily_interest=0.000
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: none
+
+Day 4 | journal through sequence 22
+  ACC-001 AED: closing=285.00 held=0.00 available=285.00 daily_interest=0.11
+    authorizations: Auth-A=SETTLED
+    fees assessed this close: none
+  ACC-002 BHD: closing=0.000 held=0.000 available=0.000 daily_interest=0.000
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: E6: UNMATCHED_SETTLEMENT
+
+Day 5 | journal through sequence 33
+  ACC-001 AED: closing=-410.00 held=0.00 available=-410.00 daily_interest=0.00
+    authorizations: Auth-A=SETTLED, Auth-B=DECLINED
+    fees assessed this close: 25.00 (value Day 2, booked Day 5), 25.00 (value Day 4, booked Day 5), 25.00 (value Day 5, booked Day 5)
+  ACC-002 BHD: closing=0.000 held=0.000 available=0.000 daily_interest=0.000
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: E8: INSUFFICIENT_AVAILABLE
+
+Day 6 | journal through sequence 50
+  ACC-001 AED: closing=210.69 held=0.00 available=210.69 daily_interest=0.08
+    authorizations: Auth-A=SETTLED, Auth-B=DECLINED
+    fees assessed this close: none
+  ACC-002 BHD: closing=10.008 held=0.000 available=10.008 daily_interest=0.004
+    authorizations: none
+    fees assessed this close: none
+  errors/exceptions: none
+
+RESTATED VALUE-DAY BALANCES, AS KNOWN AFTER ALL EVENTS
+Day | ACC-001 AED close | fee on value day | interest | ACC-002 BHD close | interest
+  1 |            250.00 |             0.00 |     0.10 |             0.000 |    0.000
+  2 |            225.00 |            25.00 |     0.09 |             0.000 |    0.000
+  3 |            625.00 |             0.00 |     0.25 |             0.000 |    0.000
+  4 |            235.00 |            25.00 |     0.09 |             0.000 |    0.000
+  5 |            210.00 |            25.00 |     0.08 |            10.000 |    0.004
+  6 |            210.69 |             0.00 |     0.08 |            10.008 |    0.004
+Day 6 closing includes capitalization; Day 6 interest uses the pre-capitalization balance.
+Historical authorization decisions stay at their original sequence; they are not restated.
+
+DAILY INTEREST AUDIT (append-only deltas)
+  seq=5 ACC-001 booked Day 1, value Day 1: 0.10
+  seq=9 ACC-001 booked Day 2, value Day 2: 0.10
+  seq=13 ACC-001 booked Day 3, value Day 3: 0.26
+  seq=21 ACC-001 booked Day 4, value Day 4: 0.11
+  seq=30 ACC-001 booked Day 5, value Day 2: -0.10
+  seq=31 ACC-001 booked Day 5, value Day 3: -0.26
+  seq=32 ACC-001 booked Day 5, value Day 4: -0.11
+  seq=40 ACC-001 booked Day 6, value Day 2: 0.09
+  seq=41 ACC-001 booked Day 6, value Day 3: 0.25
+  seq=42 ACC-001 booked Day 6, value Day 4: 0.09
+  seq=43 ACC-001 booked Day 6, value Day 5: 0.08
+  seq=44 ACC-002 booked Day 6, value Day 5: 0.004
+  seq=45 ACC-001 booked Day 6, value Day 6: 0.08
+  seq=46 ACC-002 booked Day 6, value Day 6: 0.004
+  ACC-001 capitalized: AED 0.69
+  ACC-002 capitalized: BHD 0.008
+E10 instalments: BHD 3.334 + 3.333 + 3.333 = 10.000

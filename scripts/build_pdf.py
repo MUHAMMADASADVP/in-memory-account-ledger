@@ -5,10 +5,9 @@ import re
 from xml.sax.saxutils import escape
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,7 +24,6 @@ def inline(text):
 
 def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    styles = getSampleStyleSheet()
     body = ParagraphStyle("LedgerBody", fontName="Helvetica", fontSize=10, leading=14,
                           spaceAfter=9, textColor=colors.HexColor("#263642"))
     bullet = ParagraphStyle("LedgerBullet", parent=body, fontSize=9, leading=13,

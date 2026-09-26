@@ -29,3 +29,11 @@ implementation log, not a reconstruction of a two-day effort.
   NUMBERS and the architecture source. Documented the policy-dependent nature
   of two rejected criteria, all input-order consequences, and the actual
   abandoned approaches. Prepared a PDF renderer; visual QA is next.
+- 2026-09-26T07:07:23Z - Generated the architecture PDF and rasterized all three
+  pages with PyMuPDF at 1.5x. Visually reviewed every page: no clipping, overlap,
+  or missing headings. Validated page count, text bounds, required sections and
+  the 25 MB limit (actual size 10,582 bytes). Captured replay output for review.
+  User confirmed GitHub is configured; SSH does authenticate, but as
+  faizantpdev-wq rather than the requested MUHAMMADASADVP. Checks for both the
+  proposed repository and a workspace-named repository returned not found.
+  Requested the exact writable repository URL; no remote history was changed.

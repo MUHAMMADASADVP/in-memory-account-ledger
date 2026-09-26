@@ -81,6 +81,7 @@ the brief does not uniquely determine every policy.
 | `REJECTED.md` | All eight criteria assessed and approaches abandoned |
 | `ARCHITECTURE.md` | Source for the concise architecture document |
 | `output/pdf/architecture-trade-offs.pdf` | Submission PDF |
+| `output/replay.txt` | Captured reference output from the supplied stream |
 | `WORKLOG.md` | Actual UTC work entries and verification results |
 | `DESIGN.md` | Initial design checkpoint, retained in commit history |
 
