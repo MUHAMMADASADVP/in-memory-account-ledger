@@ -48,3 +48,12 @@ implementation log, not a reconstruction of a two-day effort.
   remote for MUHAMMADASADVP/in-memory-account-ledger and provided the public key
   plus empty-public-repository setup steps. Awaiting account-side setup; no
   private key material is included in this repository.
+- 2026-09-26T07:18:17Z - After the user added the account key and created the
+  repository, verified SSH authenticates as MUHAMMADASADVP and pushed all five
+  existing commits to main without squashing. Unauthenticated GitHub API access
+  confirmed `private: false` and the exact published commit. Downloaded the PDF
+  without credentials and confirmed it is byte-identical to the reviewed local
+  artifact. Python's local HTTPS certificate configuration failed verification;
+  the system curl client succeeded with normal TLS verification. A literal
+  incognito-window check remains unperformed because no browser is connected;
+  no such check is claimed. This entry is a subsequent publication-audit commit.
