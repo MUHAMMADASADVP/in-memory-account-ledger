@@ -87,6 +87,20 @@ class ReplayTests(unittest.TestCase):
         self.assertEqual(ledger.auth_states("ACC-001")["Auth-A"].state, "SETTLED")
         self.assertEqual(ledger.held("ACC-001"), 0)
 
+    def test_as_known_on_day_five_survives_day_six_reversal(self):
+        ledger, closes = replay()
+        self.assertEqual(ledger.balance("ACC-001", 2, closes[5]), -39500)
+        self.assertEqual(ledger.balance("ACC-001", 3, closes[5]), 500)
+        self.assertEqual(ledger.balance("ACC-001", 4, closes[5]), -38500)
+        self.assertEqual(ledger.accrual("ACC-001", 2, closes[5]), 0)
+        self.assertEqual(ledger.balance("ACC-001", 2), 22500)
+
+    def test_replay_is_deterministic(self):
+        first, first_closes = replay()
+        second, second_closes = replay()
+        self.assertEqual(first.journal, second.journal)
+        self.assertEqual(first_closes, second_closes)
+
 
 class CoreTests(unittest.TestCase):
     def setUp(self):
@@ -171,6 +185,37 @@ class CoreTests(unittest.TestCase):
         with self.assertRaisesRegex(PolicyError, "missing BHD"):
             ledger.close(1)
         self.assertEqual(ledger.journal, before)
+
+    def test_fee_can_make_next_day_negative(self):
+        ledger = Ledger()
+        ledger.process(Event("negative", 1, "DEBIT", "ACC-001", "AED", 1, "1"))
+        ledger.process(credit("recovery", "2", 2))
+        ledger.close(2)
+        self.assertEqual([r.value_day for r in ledger.journal if r.kind == "FEE"], [1, 2])
+        self.assertEqual(ledger.balance("ACC-001", 2), -4900)
+
+    def test_zero_close_has_no_fee_and_hold_does_not_change_interest(self):
+        ledger = Ledger()
+        ledger.close(1)
+        self.assertFalse(any(r.kind == "FEE" for r in ledger.journal))
+        self.ledger.process(self.auth())
+        self.ledger.close(1)
+        self.assertEqual(self.ledger.accrual("ACC-001", 1), 4)
+
+    def test_declined_hold_is_not_reapproved_by_later_credit(self):
+        self.ledger.process(self.auth(units="101"))
+        self.ledger.process(credit("more", "500"))
+        self.assertEqual(self.ledger.auth_states("ACC-001")["A"].state, "DECLINED")
+        self.assertEqual(self.ledger.held("ACC-001"), 0)
+        self.assertEqual(self.ledger.process(self.auth("retry", "A")).code, "AUTH_ID_REUSED")
+
+    def test_close_clock_rejects_future_observations_and_backwards_close(self):
+        self.ledger.process(credit("later", "1", 3))
+        with self.assertRaises(PolicyError):
+            self.ledger.close(2)
+        self.ledger.close(3)
+        with self.assertRaises(PolicyError):
+            self.ledger.close(2)
 
     def test_finalization_and_immutable_records(self):
         ledger, closes = replay()

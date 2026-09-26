@@ -19,3 +19,13 @@ implementation log, not a reconstruction of a two-day effort.
   minor units over the initially considered Decimal arithmetic to avoid
   ambient-context precision effects. User supplied owner MUHAMMADASADVP.
   Installed PDF-only dependencies in the ignored local virtual environment.
+- 2026-09-26T06:57:06Z - Expanded regression coverage to 24 passing tests,
+  including fee-induced later overdrafts and immutable as-known-on-Day-5 views.
+  Browser discovery returned no available browser. Git credential presence check
+  initially looked positive, but the actual credential/API attempt found no
+  usable credential, including outside the sandbox. Requested authentication;
+  no repository has been published and no incognito check has been claimed.
+- 2026-09-26T06:59:50Z - Completed drafts of README, AMBIGUITIES, REJECTED,
+  NUMBERS and the architecture source. Documented the policy-dependent nature
+  of two rejected criteria, all input-order consequences, and the actual
+  abandoned approaches. Prepared a PDF renderer; visual QA is next.
